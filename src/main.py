@@ -1,4 +1,5 @@
 import feedparser
+from send_email import send_email
 
 html_front_string = """<!DOCTYPE html>
 <html lang="en">
@@ -117,8 +118,12 @@ def generate_file(html_contents: str, file_name: str):
         file.write(html_contents)
 
 
+def rss_to_email(recipient: str, subject: str, rss_url: str):
+    rss_feed = parse_feed(rss_url)
+    rss_html_content = generate_html(rss_feed)
+    send_email(recipient, subject, rss_html_content)
+
+
 if __name__ == '__main__':
-    feed = parse_feed('http://rss.cnn.com/rss/edition.rss')
-    html_content = generate_html(feed)
-    generate_file(html_content, 'index.html')
+    rss_to_email("mgstanley@wisc.edu", "check this out", "http://rss.cnn.com/rss/edition.rss" )
 

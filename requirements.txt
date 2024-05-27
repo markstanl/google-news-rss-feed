@@ -1,0 +1,3 @@
+feedparser~=6.0.11
+yagmail~=0.15.293
+setuptools~=70.0.0

@@ -1,4 +1,6 @@
 import yagmail
+import json
+
 
 def send_email(recipient: str, subject: str, html_contents: str):
     """
@@ -8,4 +10,12 @@ def send_email(recipient: str, subject: str, html_contents: str):
     :param html_contents: the HTML contents of the email
     :return: none
     """
-    yag = yagmail.SMTP("markgstanley1@gmail.com", "")
+    with open('pass.json') as file:
+        email_config = json.load(file)
+    yag = yagmail.SMTP(email_config["email_user"], email_config["email_pass"])
+    yag.send(
+        to=recipient,
+        subject=subject,
+        contents=html_contents
+    )
+
