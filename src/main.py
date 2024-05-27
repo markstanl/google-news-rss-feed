@@ -119,6 +119,13 @@ def generate_file(html_contents: str, file_name: str):
 
 
 def rss_to_email(recipient: str, subject: str, rss_url: str):
+    """
+    Parses the RSS feed from the given URL, generates the HTML code, and sends an email to the recipient with the given
+    :param recipient: the email address of the recipient
+    :param subject: the subject of the email
+    :param rss_url: the url of the rss feed
+    :return:
+    """
     rss_feed = parse_feed(rss_url)
     rss_html_content = generate_html(rss_feed)
     send_email(recipient, subject, rss_html_content)
